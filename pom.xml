@@ -61,7 +61,7 @@
   <!-- profiles -->
   <profiles>
     <profile>
-      <id>local</id>
+      <id>firefox_local</id>
       <properties>
         <env>local</env>
         <user.username></user.username>

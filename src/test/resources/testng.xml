@@ -4,7 +4,7 @@
 	<test name="Test1">
 		<parameter name="path" value="/"/>
 		<classes>
-		    <class name="com.yavlanskiy.HomePageTest"/>
+		    <class name="com.yavlanskiy.LoginTest"/>
 		</classes>
 	</test>  
 </suite>
