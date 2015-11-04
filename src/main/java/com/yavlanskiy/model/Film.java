@@ -5,29 +5,22 @@ public class Film {
     private String title;
     private String year;
 
-    public String getIMDb() {
-        return IMDb;
-    }
-
-    public void setIMDb(String IMDb) {
-        this.IMDb = IMDb;
-    }
-
     public String getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public Film setYear(String year) {
         this.year = year;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Film setTitle(String title) {
         this.title = title;
+        return this;
     }
 
-    private String IMDb;
 }

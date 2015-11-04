@@ -5,9 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * Created by KAIN on 03.11.2015.
- */
 public class HomePage {
 
     WebDriver webDriver;
@@ -20,7 +17,8 @@ public class HomePage {
     @FindBy (css = "#content ul li:nth-child(1) a")
     private WebElement addMovieButton;
 
-    public void clickAddMovieButton(){
+    public AddFilmPage clickAddMovieButton(){
         addMovieButton.click();
+        return new AddFilmPage(webDriver);
     }
 }
