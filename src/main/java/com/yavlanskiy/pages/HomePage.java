@@ -31,7 +31,9 @@ public class HomePage {
     private List<WebElement> listFilms;
 
     public HomePage filMoviesFild(String request){
-        findMoviFild.sendKeys(request,Keys.ENTER);
+        findMoviFild.clear();
+        findMoviFild.sendKeys(request);
+        findMoviFild.sendKeys(Keys.ENTER);
         return this;
     }
 
