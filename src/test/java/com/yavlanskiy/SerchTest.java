@@ -1,7 +1,6 @@
 package com.yavlanskiy;
 
 import com.yavlanskiy.model.User;
-import com.yavlanskiy.pages.HomePage;
 import com.yavlanskiy.pages.LoginPage;
 import org.openqa.selenium.*;
 import org.testng.Assert;
