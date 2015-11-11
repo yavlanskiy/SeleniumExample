@@ -7,12 +7,13 @@ import com.yavlanskiy.pages.HomePage;
 import com.yavlanskiy.pages.LoginPage;
 import com.yavlanskiy.pages.MovieSettingsPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
@@ -28,37 +29,40 @@ public class Task4 extends TestBase {
 
     @BeforeClass
     public void setUp(){
-        admin = new User()
-                .setLogin("admin")
-                .setPassword("admin");
-
-        film = new Film()
-                .setTitle("Побег из Шоушенка")
-                .setYear("1994");
-
+        initElement();
         driver.get(baseUrl + "/php4dvd/");
         loginPage = new LoginPage(driver);
-        homePage = loginPage.logIn(admin.getLogin(), admin.getPassword());
+        homePage = loginPage.logIn(admin);
         addFilmPage = homePage.clickAddMovieButton();
         settingsPage = addFilmPage.createNewFilm(film.getTitle(), film.getYear());
     }
 
     @Test
-    public void moviesFound(){
+    public void testSearchWithResults() throws InterruptedException {
         homePage.goTooHomePage();
-        homePage.findFilmForTitle(film.getTitle());
+        homePage.filMoviesFild(String.valueOf(System.currentTimeMillis()));
 
+        (new WebDriverWait(driver,10)).until(ExpectedConditions.textToBePresentInElementLocated
+                (By.cssSelector(".content"), "No movies where found."));
+        assertEquals("No movies where found.",
+                driver.findElement(By.cssSelector(".content"))
+                        .getText());
+
+        homePage.findFilmForTitle(film.getTitle());
         assertEquals(film.getTitle() + " (" + film.getYear() + ")",
                 driver.findElement(By.cssSelector(".maininfo_full>h2"))
                         .getText());
+
         homePage.goTooHomePage();
     }
 
     @Test
-    public void moviesNotFound(){
+    public void testSearchNoResults(){
         homePage.goTooHomePage();
-        homePage.filMoviesFild("Гладиатор");
+        homePage.filMoviesFild(String.valueOf(System.currentTimeMillis()));
 
+        (new WebDriverWait(driver,10)).until(ExpectedConditions.textToBePresentInElementLocated
+                (By.cssSelector(".content"), "No movies where found."));
         assertEquals("No movies where found.",
                 driver.findElement(By.cssSelector(".content"))
                         .getText());
@@ -70,5 +74,15 @@ public class Task4 extends TestBase {
         homePage.removingFilmByTitle(film.getTitle());
         driver.close();
         driver.quit();
+    }
+
+    private void initElement(){
+        admin = new User()
+                .setLogin("admin")
+                .setPassword("admin");
+
+        film = new Film()
+                .setTitle("Побег из Шоушенка")
+                .setYear("1994");
     }
 }

@@ -1,5 +1,6 @@
 package com.yavlanskiy.pages;
 
+import com.yavlanskiy.model.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,9 +36,16 @@ public class LoginPage extends Page {
         submitButton.click();
     }
 
-    public HomePage logIn(String username, String password){
-        setUsernameField(username);
-        setPasswordField(password);
+//    public HomePage logIn(String username, String password){
+//        setUsernameField(username);
+//        setPasswordField(password);
+//        clickSubmitButton();
+//        return new HomePage(webDriver);
+//    }
+
+    public HomePage logIn(User user){
+        setUsernameField(user.getLogin());
+        setPasswordField(user.getPassword());
         clickSubmitButton();
         return new HomePage(webDriver);
     }

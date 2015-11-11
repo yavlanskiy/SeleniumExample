@@ -35,7 +35,7 @@ public class Task3 extends TestBase {
 
         driver.get(baseUrl + "/php4dvd/");
         loginPage = new LoginPage(driver);
-        homePage = loginPage.logIn(admin.getLogin(),admin.getPassword());
+        homePage = loginPage.logIn(admin);
     }
 
     @Test
